@@ -1,0 +1,15 @@
+name: Generate Release Notes
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  generate-notes:
+    if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, '/note') }}
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Generate Release Notes
+        uses: navoda-munasinha-codimite/relbot-test@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
