@@ -69,7 +69,7 @@ function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-slate-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
             <p className="text-slate-400 text-sm mb-4 md:mb-0">
               © 2025 Release Note Bot. Open source project for the developer community.
             </p>
