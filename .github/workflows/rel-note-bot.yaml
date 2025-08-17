@@ -13,3 +13,5 @@ jobs:
         uses: navoda-munasinha-codimite/relbot-test@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
