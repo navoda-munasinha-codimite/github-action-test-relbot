@@ -10,7 +10,7 @@ jobs:
     
     steps:
       - name: Generate Release Notes
-        uses: navoda-munasinha-codimite/relbot-test@v1.0.0
+        uses: navoda-munasinha-codimite/relbot-test@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
