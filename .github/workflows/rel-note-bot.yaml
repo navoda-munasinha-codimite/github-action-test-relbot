@@ -1,0 +1,26 @@
+name: Build Pre-Release
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'release-*'
+      
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  generate-notes:
+    if: ${{ github.event.pull_request.merged == true }}
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Generate Release Notes
+        uses: navoda-munasinha-codimite/relbot-test@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pr_number: ${{ github.event.pull_request.number }}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
