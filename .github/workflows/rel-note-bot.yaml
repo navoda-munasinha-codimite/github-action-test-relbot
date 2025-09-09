@@ -9,11 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      # - name: Generate Release Notes
-      #   uses: navoda-munasinha-codimite/relbot-test@v1.0.0
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #   env:
-      #     GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: Generate Release Notes
+        uses: navoda-munasinha-codimite/relbot-test@v1.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          
       - name: Print something
         run: echo "Hello World"
