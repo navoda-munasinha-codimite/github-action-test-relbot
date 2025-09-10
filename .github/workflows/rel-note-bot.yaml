@@ -17,7 +17,27 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Check for /note comment
+        id: check_note
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ github.event.pull_request.number }}
+            });
+            
+            const hasNoteComment = comments.some(comment => 
+              comment.body.includes('/note')
+            );
+            
+            core.info(`Has /note comment: ${hasNoteComment}`);
+            core.setOutput('has_note', hasNoteComment);
+            return hasNoteComment;
+
       - name: Generate Release Notes
+        if: steps.check_note.outputs.has_note == 'true'
         uses: navoda-munasinha-codimite/relbot-test@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
