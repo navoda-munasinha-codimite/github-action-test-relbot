@@ -1,11 +1,19 @@
-name: Generate Release Notes
+name: Build Pre-Release
+
 on:
-  issue_comment:
-    types: [created]
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'release-*'
+      
+permissions:
+  contents: write
+  pull-requests: read
 
 jobs:
   generate-notes:
-    if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, '/note') }}
+    if: ${{ github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
     
     steps:
@@ -13,8 +21,6 @@ jobs:
         uses: navoda-munasinha-codimite/relbot-test@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          pr_number: ${{ github.event.pull_request.number }}
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          
-      - name: Print something
-        run: echo "Hello World"
